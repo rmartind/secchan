@@ -1,6 +1,9 @@
 const mongoose = require('mongoose');
 const Message = require('../models/messageModel');
 
+const getMessages = (req, res) => {
+
+};
 
 const getMessageById = (req, res) => {
   Message.findById(req.params.uid, (err, message) => {
@@ -37,4 +40,5 @@ module.exports = {
   createMessage,
   updateMessageById,
   deleteMessageById,
+  getMessages,
 };

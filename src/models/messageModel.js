@@ -3,20 +3,16 @@ const mongoose = require('mongoose');
 const { Schema } = mongoose;
 
 const messageSchema = new Schema({
-  _id: {
-    type: Number,
-    required: true,
-  },
   chanID: {
-    type: Number,
+    type: String,
     required: true,
   },
   threadID: {
-    type: Number,
+    type: String,
     required: true,
   },
   userID: {
-    type: Number,
+    type: String,
     required: true,
   },
   name: {

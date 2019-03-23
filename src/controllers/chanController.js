@@ -1,6 +1,12 @@
 const mongoose = require('mongoose');
 const Chan = require('../models/chanModel');
 
+const getChans = (req, res) => {
+  Chan.findById({}, (err, chans) => {
+    if (err) res.send(err);
+    res.json(chans);
+  });
+};
 
 const getChanById = (req, res) => {
   Chan.findById(req.params.id, (err, chan) => {
@@ -32,9 +38,15 @@ const deleteChanById = (req, res) => {
   });
 };
 
+const getChanThreads = (req, res) => {
+
+};
+
 module.exports = {
+  getChans,
   getChanById,
   createChan,
   updateChanById,
   deleteChanById,
+  getChanThreads,
 };

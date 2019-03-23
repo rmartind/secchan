@@ -1,6 +1,9 @@
 const mongoose = require('mongoose');
 const Thread = require('../models/threadModel');
 
+const getThreads = (req, res) => {
+
+};
 
 const getThreadById = (req, res) => {
   Thread.findById(req.params.id, (err, thread) => {
@@ -32,9 +35,15 @@ const deleteThreadById = (req, res) => {
   });
 };
 
+const getThreadMessages = (req, res) => {
+
+};
+
 module.exports = {
+  getThreads,
   getThreadById,
   createThread,
   updateThreadById,
   deleteThreadById,
+  getThreadMessages,
 };

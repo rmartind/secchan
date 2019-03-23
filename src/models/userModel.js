@@ -3,10 +3,6 @@ const mongoose = require('mongoose');
 const { Schema } = mongoose;
 
 const userSchema = new Schema({
-  _id: {
-    type: Number,
-    required: true,
-  },
   username: {
     type: String,
     required: true,
@@ -24,6 +20,11 @@ const userSchema = new Schema({
     required: true,
     minlength: 6,
     maxlength: 64,
+  },
+  role: {
+    type: String,
+    required: true,
+    default: 'user',
   },
   phone: {
     type: String,
