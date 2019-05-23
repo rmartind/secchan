@@ -23,7 +23,7 @@ fs.readFile('private.key', 'UTF-8', (err, data) => {
   }));
 
   passport.use('admin-role', new Strategy(opts, (payload, done) => {
-    User.findOne({ payload: payload.username }, (jwtErr, user) => {
+    User.findOne({ username: payload.username }, (jwtErr, user) => {
       if (jwtErr) return done(jwtErr, false);
       if (!user) return done(null, false);
       if (payload.role === 'admin' && user.role === 'admin') return done(null, user);

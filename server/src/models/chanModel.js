@@ -12,6 +12,11 @@ const chanSchema = new Schema({
     minlength: 2,
     maxlength: 100,
   },
+  type: {
+    type: String,
+    minlength: 3,
+    maxlength: 50,
+  },
   nsfw: Boolean,
   position: {
     type: Number,
@@ -26,3 +31,10 @@ const chanSchema = new Schema({
 
 module.exports = mongoose.model('Chan', chanSchema);
 
+/*
+Channel types
+General
+Hacking 
+Coding 
+NSFW
+*/

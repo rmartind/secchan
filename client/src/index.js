@@ -1,4 +1,9 @@
 import React from 'react';
 import { render } from 'react-dom';
+import { configureStore, sagaMiddleware } from './configureStore';
+import Root from './components/Root';
+import initSagas from './initSagas';
 
-render(<h1>hello</h1>, document.getElementById('root'));
+const store = configureStore();
+initSagas(sagaMiddleware);
+render(<Root store={store} />, document.getElementById('root'));

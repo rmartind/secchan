@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 const Chan = require('../models/chanModel');
 
 const getChans = (req, res) => {
-  Chan.findById({}, (err, chans) => {
+  Chan.find({}, (err, chans) => {
     if (err) res.send(err);
     res.json(chans);
   });
