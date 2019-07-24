@@ -1,3 +1,3 @@
-import { channelsSaga } from './channelsSaga';
-
-export default channelsSaga;
+export * from './channelsSaga';
+export * from './loginSagas';
+export * from './signUpSagas';

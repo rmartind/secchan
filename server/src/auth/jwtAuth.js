@@ -22,12 +22,21 @@ fs.readFile('private.key', 'UTF-8', (err, data) => {
     });
   }));
 
-  passport.use('admin-role', new Strategy(opts, (payload, done) => {
+  passport.use('any-role', new Strategy(opts, (payload, done) => {
     User.findOne({ username: payload.username }, (jwtErr, user) => {
       if (jwtErr) return done(jwtErr, false);
       if (!user) return done(null, false);
       if (payload.role === 'admin' && user.role === 'admin') return done(null, user);
       if (payload.role === 'user' && user.role === 'user') return done(null, user);
+      return done(null, false);
+    });
+  }));
+
+  passport.use('admin-role', new Strategy(opts, (payload, done) => {
+    User.findOne({ username: payload.username }, (jwtErr, user) => {
+      if (jwtErr) return done(jwtErr, false);
+      if (!user) return done(null, false);
+      if (payload.role === 'admin' && user.role === 'admin') return done(null, user);
       return done(null, false);
     });
   }));

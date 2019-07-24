@@ -46,14 +46,6 @@ const deleteUserById = (req, res) => {
   });
 };
 
-const registerUser = async (req, res) => {
-  const password = await bcrypt.hash(req.body.password, 7);
-  delete req.body.password;
-  const newUser = await new User({ hashedPassword: password, ...req.body });
-  await newUser.save();
-  res.json(newUser);
-};
-
 const localLogin = (req, res, next) => {
   passport.authenticate('local-login', (authError, user) => {
     if (authError || !user) {
@@ -67,11 +59,45 @@ const localLogin = (req, res, next) => {
         role: user.role,
       }, 'DF3D81D29F464A8BCC3768BAC4264', (tokenError, token) => {
         if (tokenError) return next(tokenError);
-        return res.json(token);
+        return res.json({
+          token,
+          username: user.username,
+          role: user.role,
+          email: user.email,
+        });
       });
       return next(loginError);
     });
     return next(authError);
+  })(req, res, next);
+};
+
+const registerUser = async (req, res) => {
+  const password = await bcrypt.hash(req.body.password, 7);
+  const newUser = await new User({ hashedPassword: password, ...req.body });
+  await newUser.save();
+
+  const token = await jwt.sign({
+    username: req.body.username,
+    password: req.body.password,
+    role: req.body.role,
+  }, 'DF3D81D29F464A8BCC3768BAC4264');
+  delete req.body.password;
+
+  return res.json({
+    token,
+    username: newUser.username,
+    role: newUser.role,
+    email: newUser.email,
+  });
+};
+
+const reauthToken = (req, res, next) => {
+  passport.authenticate('any-role', (authError, user) => {
+    if (authError || !user) {
+      return res.status(401).send('Reauthorization error');
+    }
+    return res.status(200).send('Reauthorization successful');
   })(req, res, next);
 };
 
@@ -84,4 +110,5 @@ module.exports = {
   getCurrentUser,
   deleteCurrentUser,
   updateCurrentUser,
+  reauthToken,
 };

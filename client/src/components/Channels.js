@@ -4,6 +4,7 @@ import React from 'react';
 const Channels = ({ channels }) => (
   <section className="content">
     <ul>
+      {console.log(channels)}
       {channels.map(channel => <li key={channel._id}>{channel.name}</li>)}
     </ul>
   </section>

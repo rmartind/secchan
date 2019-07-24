@@ -9,6 +9,7 @@ const {
   getCurrentUser,
   deleteCurrentUser,
   updateCurrentUser,
+  reauthToken,
 } = require('../controllers/userController');
 
 const baseUrl = '/api/v1/users/';
@@ -16,14 +17,17 @@ const baseUrl = '/api/v1/users/';
 const userRoutes = (router) => {
   router.route(`${baseUrl}me`)
     // Get current user
-    .get(passport.authenticate('user-role',
+    .get(passport.authenticate('any-role',
       { session: false }), getCurrentUser)
     // Update current user
-    .put(passport.authenticate('user-role',
+    .put(passport.authenticate('any-role',
       { session: false }), updateCurrentUser)
     // Delete current user
-    .delete(passport.authenticate('user-role',
+    .delete(passport.authenticate('any-role',
       { session: false }), deleteCurrentUser);
+
+  router.route(`${baseUrl}me/token`)
+    .post(reauthToken);
 
   router.route(`${baseUrl}:uid`)
     // Get user
