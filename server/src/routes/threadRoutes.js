@@ -1,4 +1,4 @@
-require('express');
+ require('express');
 const passport = require('passport');
 require('../auth/jwtAuth');
 const {

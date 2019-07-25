@@ -15,9 +15,8 @@ const baseUrl = '/api/v1/channels/';
 
 const chanRoutes = (router) => {
   router.route(`${baseUrl}`)
-    // Get channels
     .get(getChans)
-    // Create channel
+
     .post(passport.authenticate('admin-role',
       { session: false }), createChan);
 

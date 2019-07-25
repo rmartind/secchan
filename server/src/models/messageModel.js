@@ -22,6 +22,8 @@ const messageSchema = new Schema({
   content: {
     type: String,
     minlength: 2,
+    maxlength: 2000,
+    required: true,
   },
   creation: {
     type: Date,
