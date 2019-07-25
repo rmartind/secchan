@@ -13,12 +13,12 @@ const baseUrl = '/api/v1/messages/';
 
 const messageRoutes = (router) => {
   router.route(`${baseUrl}`)
-    .get(getMessages);
+    .get(getMessages)
+    .post(passport.authenticate('user-role',
+      { session: false }), createMessage);
 
   router.route(`${baseUrl}:id`)
     .get(getMessageById)
-    .post(passport.authenticate('user-role',
-      { session: false }), createMessage)
     .put(passport.authenticate('user-role',
       { session: false }), updateMessageById)
     .delete(passport.authenticate('user-role',
