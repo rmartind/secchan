@@ -19,10 +19,9 @@ const messageSchema = new Schema({
     type: String,
     required: true,
   },
-  title: {
+  content: {
     type: String,
     minlength: 2,
-    maxlength: 100,
   },
   creation: {
     type: Date,

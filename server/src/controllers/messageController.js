@@ -1,38 +1,66 @@
-const mongoose = require('mongoose');
+require('mongoose');
 const Message = require('../models/messageModel');
+const User = require('../models/userModel');
 
-const getMessages = (req, res) => {
-
-};
-
-const getMessageById = (req, res) => {
-  Message.findById(req.params.uid, (err, message) => {
-    if (err) res.send(err);
+const getMessages = async (req, res) => {
+  try {
+    const message = await Message.find({});
     res.json(message);
-  });
+  } catch (error) {
+    res.json(error);
+  }
 };
 
-const createMessage = (req, res) => {
-  const message = new Message(req.body);
-  message.save((err, createdMessage) => {
-    if (err) res.send(err);
-    res.json(createdMessage);
-  });
+const getMessageById = async (req, res) => {
+  try {
+    const message = await Message.findById(req.params.id);
+    res.json(message);
+  } catch (error) {
+    res.json(error);
+  }
 };
 
-const updateMessageById = (req, res) => {
-  Message.findByIdAndUpdate(req.params.uid, req.body,
-    { new: true }, (err, updatedMessage) => {
-      if (err) res.send(err);
-      res.json(updatedMessage);
+const createMessage = async (req, res) => {
+  try {
+    const user = await User.findOne({ username: req.user.username });
+    const data = {
+      threadID: req.body.threadID,
+      userID: user.id,
+      content: req.body.content,
+    };
+    let newMessage = await new Message(data);
+    newMessage = await newMessage.save();
+    res.json(newMessage);
+  } catch (error) {
+    res.json(error);
+  }
+};
+
+const updateMessageById = async (req, res) => {
+  try {
+    const user = await User.findOne({ username: req.user.username });
+    const query = {
+      _id: req.params.id,
+      userID: user.id,
+    };
+    req.body.id = user.id;
+    const updatedMessage = await Message.findOneAndUpdate(query, req.body, { new: true });
+    res.json(updatedMessage);
+  } catch (error) {
+    res.json(error);
+  }
+};
+
+const deleteMessageById = async (req, res) => {
+  try {
+    const deletedMessage = await Message.findOneAndDelete({
+      _id: req.params.id,
+      userID: req.user.id,
     });
-};
-
-const deleteMessageById = (req, res) => {
-  Message.findByIdAndDelete(req.params.uid, (err, deletedMessage) => {
-    if (err) res.send(err);
     res.json(deletedMessage);
-  });
+  } catch (error) {
+    res.json(error);
+  }
 };
 
 module.exports = {

@@ -1,5 +1,7 @@
 import fetch from 'isomorphic-fetch';
 
+const baseUrl = 'http://localhost:8001/api/v1/';
+
 export async function loginRequest(req) {
   JSON.stringify(req.user);
   const args = {
@@ -9,7 +11,7 @@ export async function loginRequest(req) {
     },
     body: JSON.stringify(req.user),
   };
-  const response = await fetch('http://localhost:8001/api/v1/users/auth/login', args);
+  const response = await fetch(`${baseUrl}users/auth/login`, args);
   return response.json();
 }
 
@@ -24,7 +26,7 @@ export async function signUpRequest(req) {
     body: JSON.stringify(req.user),
   };
 
-  const response = await fetch('http://localhost:8001/api/v1/users/auth/register', args);
+  const response = await fetch(`${baseUrl}users/auth/register`, args);
   return response.json();
 }
 
@@ -38,11 +40,11 @@ export async function reauthRequest() {
     },
   };
 
-  const response = await fetch('http://localhost:8001/api/v1/users/auth/login', args);
+  const response = await fetch(`${baseUrl}users/auth/login`, args);
   return response.json();
 }
 
 export async function channelsRequest() {
-  const response = await fetch('http://localhost:8001/api/v1/channels/');
+  const response = await fetch(`${baseUrl}channels/`);
   return response.json();
 }

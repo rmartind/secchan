@@ -3,7 +3,7 @@ const mongoose = require('mongoose');
 const { Schema } = mongoose;
 
 const threadSchema = new Schema({
-  chanID: {
+  channelID: {
     type: String,
     required: true,
   },
@@ -11,14 +11,11 @@ const threadSchema = new Schema({
     type: String,
     required: true,
   },
-  name: {
-    type: String,
-    required: true,
-  },
   title: {
     type: String,
     minlength: 2,
     maxlength: 100,
+    required: true,
   },
   creation: {
     type: Date,
