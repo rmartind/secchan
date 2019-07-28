@@ -1,10 +1,4 @@
 import React from 'react';
-import Header from './Header';
-import Footer from './Footer';
-import Nav from './Nav';
-import './App.css';
-
-
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { login } from '../actions';
@@ -28,7 +22,6 @@ class Login extends React.Component {
   render() {
     return (
       <div className="wrapper">
-        <Header Nav={Nav} />
         <form onSubmit={this.handleOnSubmit}>
           <label htmlFor="username">Username:</label>
           <input type="text" name="username" id="username" required />
@@ -37,7 +30,6 @@ class Login extends React.Component {
           
           <button>Submit</button>
         </form>
-        <Footer />
       </div>
     );
   }

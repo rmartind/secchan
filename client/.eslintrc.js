@@ -23,5 +23,6 @@ module.exports = {
     "no-underscore-dangle": ["error", { "allow": ["_id"] }],
     "no-console": "off",
     "import/prefer-default-export": "off",
+    "react/prop-types": "off",
   }
 };

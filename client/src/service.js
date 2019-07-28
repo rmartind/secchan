@@ -103,8 +103,14 @@ export const threadsRequest = async () => {
   return response.json();
 };
 
-export const threadsByChannel = async (req) => {
+export const threadsByChannelID = async (req) => {
+  console.log(req.channelID);
   const response = await fetch(`${baseUrl}channels/${req.channelID}/threads`);
+  return response.json();
+};
+
+export const threadsByChannelName = async (req) => {
+  const response = await fetch(`${baseUrl}channels/name/${req.channelID}/threads`);
   return response.json();
 };
 

@@ -7,6 +7,10 @@ const threadSchema = new Schema({
     type: String,
     required: true,
   },
+  channelName: {
+    type: String,
+    required: true,
+  },
   userID: {
     type: String,
     required: true,

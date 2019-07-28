@@ -5,15 +5,24 @@ import React from 'react';
 import App from './App';
 import Signup from './Signup';
 import Login from './Login';
+import Footer from './Footer';
+import Header from './Header';
+import Nav from './Nav';
+import Channel from './Channel';
+import Thread from './Thread';
 
 const Root = ({ store }) => (
   <Provider store={store}>
     <Router>
+      <Header Nav={Nav} />
       <Switch>
         <Route path="/login" component={Login} />
         <Route path="/signup" component={Signup} />
-        <Route path="/" component={App} />
+        <Route exact path="/" component={App} />
+        <Route exact path="/:channelName" component={Channel} />
+        <Route exact path="/:channelName/:threadTopic" component={Thread} />
       </Switch>
+      <Footer />
     </Router>
   </Provider>
 );

@@ -48,11 +48,21 @@ const deleteChanById = async (req, res) => {
   }
 };
 
-const getChanThreads = async (req, res) => {
+const getChanThreadsByID = async (req, res) => {
   try {
-    const threads = Threads.find(req.params.channelID);
+    const threads = await Threads.find(req.params.channelID);
     res.send(threads);
   } catch (error) {
+    res.json(error);
+  }
+};
+
+const getChanThreadsByName = async (req, res) => {
+  try {
+    const threads = await Threads.find({ channelName: req.params.name });
+    res.send(threads);
+  } catch (error) {
+    console.log(error);
     res.json(error);
   }
 };
@@ -63,5 +73,6 @@ module.exports = {
   createChan,
   updateChanById,
   deleteChanById,
-  getChanThreads,
+  getChanThreadsByID,
+  getChanThreadsByName,
 };

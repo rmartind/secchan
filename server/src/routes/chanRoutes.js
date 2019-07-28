@@ -7,7 +7,8 @@ const {
   createChan,
   updateChanById,
   deleteChanById,
-  getChanThreads,
+  getChanThreadsByID,
+  getChanThreadsByName,
 } = require('../controllers/chanController');
 
 const baseUrl = '/api/v1/channels/';
@@ -31,7 +32,11 @@ const chanRoutes = (router) => {
 
   router.route(`${baseUrl}:id/threads`)
     // Get channel threads
-    .get(getChanThreads);
+    .get(getChanThreadsByID);
+
+  router.route(`${baseUrl}name/:name/threads`)
+    // Get channel threads
+    .get(getChanThreadsByName);
 };
 
 module.exports = chanRoutes;
