@@ -5,7 +5,7 @@ import { bindActionCreators } from 'redux';
 import { BrowserRouter as Router, Link } from 'react-router-dom';
 import { threadsByChannel } from '../actions';
 
-class Channel extends React.Component {
+class Threads extends React.Component {
   componentDidMount() {
     console.log(this.props);
     const channelName = this.props.location.pathname.replace('/', '');
@@ -19,7 +19,7 @@ class Channel extends React.Component {
           {this.props.threads.map(thread => (
             <li key={thread._id}>
               <Link to={{
-                pathname: `${this.props.location.pathname}/${thread.title}`,
+                pathname: `${this.props.location.pathname}/${thread._id}`,
                 thread,
               }}
               >
@@ -44,4 +44,4 @@ const mapDispatch = dispatch => bindActionCreators(
   dispatch,
 );
 
-export default connect(mapState, mapDispatch)(Channel);
+export default connect(mapState, mapDispatch)(Threads);

@@ -22,8 +22,10 @@ const getMessageById = async (req, res) => {
 
 const createMessage = async (req, res) => {
   try {
+    console.log(req.body);
     const user = await User.findOne({ username: req.user.username });
     const data = {
+      channelID: req.body.channelID,
       threadID: req.body.threadID,
       userID: user.id,
       content: req.body.content,

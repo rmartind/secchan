@@ -20,7 +20,7 @@ const Root = ({ store }) => (
         <Route path="/signup" component={Signup} />
         <Route exact path="/" component={App} />
         <Route exact path="/:channelName" component={Channel} />
-        <Route exact path="/:channelName/:threadTopic" component={Thread} />
+        <Route exact path="/:channelName/:threadID" component={Thread} />
       </Switch>
       <Footer />
     </Router>

@@ -1,6 +1,7 @@
 require('mongoose');
 const Thread = require('../models/threadModel');
 const User = require('../models/userModel');
+const Message = require('../models/messageModel');
 
 const getThreads = async (req, res) => {
   try {
@@ -65,7 +66,8 @@ const deleteThreadById = async (req, res) => {
 
 const getThreadMessages = async (req, res) => {
   try {
-    res.send('placeholder');
+    const messages = await Message.find(req.params.channelID);
+    res.send(messages);
   } catch (error) {
     res.json(error);
   }

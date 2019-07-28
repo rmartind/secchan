@@ -1,9 +1,10 @@
 import React from 'react';
 import './App.css';
+import Messages from '../containers/Messages';
 
-const Thread = () => (
+const Thread = ({ location }) => (
   <div className="wrapper">
-      I am a thread.
+    <Messages location={location} />
   </div>
 );
 

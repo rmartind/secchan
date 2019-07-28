@@ -14,7 +14,7 @@ const baseUrl = '/api/v1/messages/';
 const messageRoutes = (router) => {
   router.route(`${baseUrl}`)
     .get(getMessages)
-    .post(passport.authenticate('user-role',
+    .post(passport.authenticate('any-role',
       { session: false }), createMessage);
 
   router.route(`${baseUrl}:id`)

@@ -13,6 +13,9 @@ import {
   THREADS,
   THREADS_SUCCESS,
   THREADS_FAILURE,
+  MESSAGES,
+  MESSAGES_SUCCESS,
+  MESSAGES_FAILURE,
 } from '../actions/actionTypes';
 
 
@@ -25,6 +28,34 @@ const channels = (state = [], action) => {
     case CHANNELS_SUCCESS:
       return [...response];
     case CHANNELS_FAILURE:
+      return [...response];
+    default:
+      return state;
+  }
+};
+
+const threads = (state = [], action) => {
+  const { response } = action;
+  switch (action.type) {
+    case THREADS:
+      return state;
+    case THREADS_SUCCESS:
+      return [...response];
+    case THREADS_FAILURE:
+      return [...response];
+    default:
+      return state;
+  }
+};
+
+const messages = (state = [], action) => {
+  const { response } = action;
+  switch (action.type) {
+    case MESSAGES:
+      return state;
+    case MESSAGES_SUCCESS:
+      return [...response];
+    case MESSAGES_FAILURE:
       return [...response];
     default:
       return state;
@@ -62,22 +93,8 @@ const reauth = (state = [], action) => {
   }
 };
 
-const threads = (state = [], action) => {
-  const { response } = action;
-  switch (action.type) {
-    case THREADS:
-      return state;
-    case THREADS_SUCCESS:
-      return [...response];
-    case THREADS_FAILURE:
-      return [...response];
-    default:
-      return state;
-  }
-};
-
 const rootReducer = combineReducers({
-  channels, login, reauth, threads,
+  channels, login, reauth, threads, messages,
 });
 
 export default rootReducer;
