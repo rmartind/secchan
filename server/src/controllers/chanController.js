@@ -59,7 +59,7 @@ const getChanThreadsByID = async (req, res) => {
 
 const getChanThreadsByName = async (req, res) => {
   try {
-    const threads = await Threads.find({ channelName: req.params.name });
+    const threads = await Threads.find({ channelName: req.params.name }).populate('user');
     res.send(threads);
   } catch (error) {
     console.log(error);

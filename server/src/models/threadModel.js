@@ -11,8 +11,9 @@ const threadSchema = new Schema({
     type: String,
     required: true,
   },
-  userID: {
-    type: String,
+  user: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'User',
     required: true,
   },
   title: {

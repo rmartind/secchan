@@ -7,12 +7,27 @@ const messageSchema = new Schema({
     type: String,
     required: true,
   },
+  channel: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'Chan',
+    required: true,
+  },
   threadID: {
     type: String,
     required: true,
   },
+  thread: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'Thread',
+    required: true,
+  },
   userID: {
     type: String,
+    required: true,
+  },
+  user: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'User',
     required: true,
   },
   content: {

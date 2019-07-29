@@ -19,7 +19,7 @@ class Messages extends React.Component {
         <>
           {this.props.messages.map(message => (
             <li key={message._id}>
-              {message.content}
+              {`${message.user.username} : ${message.content}`}
             </li>
           ))}
         </>

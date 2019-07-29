@@ -5,7 +5,7 @@ const Message = require('../models/messageModel');
 
 const getThreads = async (req, res) => {
   try {
-    const thread = await Thread.find({});
+    const thread = await Thread.find({}).populate('user');
     res.json(thread);
   } catch (error) {
     res.json(error);
@@ -14,7 +14,7 @@ const getThreads = async (req, res) => {
 
 const getThreadById = async (req, res) => {
   try {
-    const thread = await Thread.findById(req.params.id);
+    const thread = await Thread.findById(req.params.id).populate('user');
     res.json(thread);
   } catch (error) {
     res.json(error);
@@ -26,7 +26,9 @@ const createThread = async (req, res) => {
     const user = await User.findOne({ username: req.user.username });
     const data = {
       channelID: req.body.channelID,
+      channelName: req.body.channelName,
       userID: user.id,
+      user: user.id,
       title: req.body.title,
     };
     let newThread = await new Thread(data);
@@ -44,8 +46,7 @@ const updateThreadById = async (req, res) => {
       _id: req.params.id,
       userID: user.id,
     };
-    req.body.id = user.id;
-    const updatedThread = await Thread.findOneAndUpdate(query, req.body, { new: true });
+    const updatedThread = await Thread.findOneAndUpdate(query, req.body.title, { new: true });
     res.json(updatedThread);
   } catch (error) {
     res.json(error);
@@ -66,7 +67,8 @@ const deleteThreadById = async (req, res) => {
 
 const getThreadMessages = async (req, res) => {
   try {
-    const messages = await Message.find(req.params.channelID);
+    const populaters = [{ path: 'thread' }, { path: 'user' }, { path: 'channel' }];
+    const messages = await Message.find({ threadID: req.params.thread }).populate(populaters);
     res.send(messages);
   } catch (error) {
     res.json(error);

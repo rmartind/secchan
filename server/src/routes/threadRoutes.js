@@ -29,7 +29,7 @@ const threadRoutes = (router) => {
     .delete(passport.authenticate('any-role',
       { session: false }), deleteThreadById);
 
-  router.route(`${baseUrl}:id/messages`)
+  router.route(`${baseUrl}:thread/messages`)
     // Get thread messages
     .get(getThreadMessages);
 };

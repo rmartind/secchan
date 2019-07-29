@@ -4,7 +4,8 @@ const User = require('../models/userModel');
 
 const getMessages = async (req, res) => {
   try {
-    const message = await Message.find({});
+    const populaters = [{ path: 'thread' }, { path: 'user' }, { path: 'channel' }];
+    const message = await Message.find({}).populate(populaters);
     res.json(message);
   } catch (error) {
     res.json(error);
@@ -13,7 +14,8 @@ const getMessages = async (req, res) => {
 
 const getMessageById = async (req, res) => {
   try {
-    const message = await Message.findById(req.params.id);
+    const populaters = [{ path: 'thread' }, { path: 'user' }, { path: 'channel' }];
+    const message = await Message.findById(req.params.id).populate(populaters);
     res.json(message);
   } catch (error) {
     res.json(error);
@@ -22,12 +24,14 @@ const getMessageById = async (req, res) => {
 
 const createMessage = async (req, res) => {
   try {
-    console.log(req.body);
     const user = await User.findOne({ username: req.user.username });
     const data = {
       channelID: req.body.channelID,
+      channel: req.body.channelID,
       threadID: req.body.threadID,
+      thread: req.body.threadID,
       userID: user.id,
+      user: user.id,
       content: req.body.content,
     };
     let newMessage = await new Message(data);
@@ -46,7 +50,7 @@ const updateMessageById = async (req, res) => {
       userID: user.id,
     };
     req.body.id = user.id;
-    const updatedMessage = await Message.findOneAndUpdate(query, req.body, { new: true });
+    const updatedMessage = await Message.findOneAndUpdate(query, req.body.content, { new: true });
     res.json(updatedMessage);
   } catch (error) {
     res.json(error);
