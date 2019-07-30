@@ -8,8 +8,8 @@ import Login from './Login';
 import Footer from './Footer';
 import Header from './Header';
 import Nav from './Nav';
-import Channel from './Channel';
-import Thread from './Thread';
+import Channel from '../containers/Channel';
+import Thread from '../containers/Thread';
 
 const Root = ({ store }) => (
   <Provider store={store}>
