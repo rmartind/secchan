@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { messagesByThread, threadByID } from '../actions';
 import Messages from '../components/Messages';
-import MessageForm from '../components/MessageForm';
+import MessageForm from './MessageForm';
 
 class Thread extends React.Component {
   componentDidMount() {

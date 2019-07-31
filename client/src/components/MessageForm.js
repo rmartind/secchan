@@ -1,8 +1,16 @@
 import React from 'react';
 
 
-const MessageForm = () => {
-  const handleOnSubmit = event => (event.preventDefault());
+const MessageForm = ({ addMessage, currentThread }) => {
+  const handleOnSubmit = (event) => {
+    event.preventDefault();
+    const message = {
+      channelID: currentThread.channelID,
+      threadID: currentThread._id,
+      content: event.target.content.value,
+    };
+    addMessage(message);
+  };
   return (
     <div className="message-form">
       <form onSubmit={handleOnSubmit}>

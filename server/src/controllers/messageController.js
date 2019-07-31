@@ -24,7 +24,9 @@ const getMessageById = async (req, res) => {
 
 const createMessage = async (req, res) => {
   try {
+    const populaters = [{ path: 'thread' }, { path: 'user' }, { path: 'channel' }];
     const user = await User.findOne({ username: req.user.username });
+    console.log(user);
     const data = {
       channelID: req.body.channelID,
       channel: req.body.channelID,
@@ -36,7 +38,8 @@ const createMessage = async (req, res) => {
     };
     let newMessage = await new Message(data);
     newMessage = await newMessage.save();
-    res.json(newMessage);
+    const message = await Message.findById(newMessage.id).populate(populaters);
+    res.json(message);
   } catch (error) {
     res.json(error);
   }

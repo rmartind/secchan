@@ -177,12 +177,14 @@ export const getMessageByID = async (req) => {
 };
 
 export const createMessage = async (req) => {
-  const token = sessionStorage.getItem('token');
+  console.log(req.message);
+  const token = await sessionStorage.getItem('token');
+  console.log(token);
   const args = {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
-      Authorization: token,
+      Authorization: `Bearer ${token}`,
     },
     body: JSON.stringify(req.message),
   };

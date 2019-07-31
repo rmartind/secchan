@@ -77,9 +77,9 @@ const messages = (state = [], action) => {
     case MESSAGES_FAILURE:
       return [...response];
     case ADD_MESSAGE_SUCCESS:
-      return [...state, ...response];
+      return [...state, response];
     case ADD_MESSAGE_FAILURE:
-      return [...state, ...response];
+      return [...state, response];
     default:
       return state;
   }
