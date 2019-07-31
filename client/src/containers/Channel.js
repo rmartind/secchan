@@ -1,14 +1,16 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { threadsByChannel } from '../actions';
+import { threadsByChannel, channelByName } from '../actions';
 import Threads from '../components/Threads';
-import ThreadForm from '../components/ThreadForm';
+import ThreadForm from './ThreadForm';
 
 class Channel extends React.Component {
   componentDidMount() {
     const channelName = this.props.location.pathname.replace('/', '');
-    this.props.threadsByChannel(channelName);
+    const { threadsByChannel, channelByName} = this.props;
+    threadsByChannel(channelName);
+    channelByName(channelName);
   }
 
   render() {
@@ -28,6 +30,7 @@ const mapState = state => ({
 const mapDispatch = dispatch => bindActionCreators(
   {
     threadsByChannel,
+    channelByName,
   },
   dispatch,
 );

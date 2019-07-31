@@ -19,7 +19,9 @@ class Thread extends React.Component {
   render() {
     return (
       <div className="wrapper">
-        {this.props.currentThread.title}
+        {
+          this.props.currentThread.title
+        }
         <br/>
         {this.props.currentThread.content}
         <MessageForm />

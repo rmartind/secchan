@@ -22,6 +22,12 @@ const threadSchema = new Schema({
     maxlength: 100,
     required: true,
   },
+  content: {
+    type: String,
+    minlength: 2,
+    maxlength: 2000,
+    required: true,
+  },
   creation: {
     type: Date,
     default: Date.now,

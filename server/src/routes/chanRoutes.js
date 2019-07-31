@@ -8,6 +8,7 @@ const {
   updateChanById,
   deleteChanById,
   getChanThreadsByID,
+  getChanByName,
   getChanThreadsByName,
 } = require('../controllers/chanController');
 
@@ -33,6 +34,10 @@ const chanRoutes = (router) => {
   router.route(`${baseUrl}:id/threads`)
     // Get channel threads
     .get(getChanThreadsByID);
+
+  router.route(`${baseUrl}name/:name`)
+    // Get channel threads
+    .get(getChanByName);
 
   router.route(`${baseUrl}name/:name/threads`)
     // Get channel threads

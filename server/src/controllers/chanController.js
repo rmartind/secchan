@@ -1,6 +1,6 @@
 require('mongoose');
 const Chan = require('../models/chanModel');
-const Threads = require('../models/threadModel');
+const Thread = require('../models/threadModel');
 
 const getChans = async (req, res) => {
   try {
@@ -50,22 +50,33 @@ const deleteChanById = async (req, res) => {
 
 const getChanThreadsByID = async (req, res) => {
   try {
-    const threads = await Threads.find(req.params.channelID);
+    const threads = await Thread.find(req.params.channelID);
     res.send(threads);
   } catch (error) {
     res.json(error);
   }
 };
 
-const getChanThreadsByName = async (req, res) => {
+const getChanByName = async (req, res) => {
   try {
-    const threads = await Threads.find({ channelName: req.params.name }).populate('user');
-    res.send(threads);
+    const channel = await Chan.findOne(req.params).populate('user');
+    res.json(channel);
   } catch (error) {
     console.log(error);
     res.json(error);
   }
 };
+
+const getChanThreadsByName = async (req, res) => {
+  try {
+    const channel = await Thread.find({ channelName: req.params.name }).populate('user');
+    res.json(channel);
+  } catch (error) {
+    console.log(error);
+    res.json(error);
+  }
+};
+
 
 module.exports = {
   getChans,
@@ -75,4 +86,5 @@ module.exports = {
   deleteChanById,
   getChanThreadsByID,
   getChanThreadsByName,
+  getChanByName,
 };

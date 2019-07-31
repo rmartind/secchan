@@ -30,10 +30,13 @@ const createThread = async (req, res) => {
       userID: user.id,
       user: user.id,
       title: req.body.title,
+      content: req.body.content,
     };
     let newThread = await new Thread(data);
     newThread = await newThread.save();
-    res.json(newThread);
+    const thread = await Thread.findById(newThread.id).populate('user');
+    console.log(thread);
+    res.json(thread);
   } catch (error) {
     res.json(error);
   }

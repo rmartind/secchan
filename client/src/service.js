@@ -55,6 +55,11 @@ export const getChannelByID = async (req) => {
   return response.json();
 };
 
+export const getChannelByName = async (req) => {
+  const response = await fetch(`${baseUrl}channels/name/${req.name}/`);
+  return response.json();
+};
+
 export const createChannel = async (req) => {
   const token = sessionStorage.getItem('token');
   const args = {
@@ -125,7 +130,7 @@ export const createThread = async (req) => {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
-      Authorization: token,
+      Authorization: `Bearer ${token}`,
     },
     body: JSON.stringify(req.thread),
   };
