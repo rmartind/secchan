@@ -1,13 +1,34 @@
 import React from 'react';
-import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
-import { login } from '../actions';
+import { NavLink } from 'react-router-dom';
+import {
+  TextField,
+  MenuItem,
+  Button,
+  Container,
+  Grid,
+  Link
+} from '@material-ui/core';
 
+import { makeStyles } from '@material-ui/core/styles';
 
+const useStyles = makeStyles(theme => ({
+  root: {
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
+    marginTop: theme.spacing(6),
+  },
+  form: {
+    width: '100%',
+  },
+  button: {
+    width: '100%',
+    margin: theme.spacing(1, 0, 1),
+  },
+}));
 
-// eslint-disable-next-line react/prefer-stateless-function
-class Login extends React.Component {
-  handleOnSubmit = event => {
+const Login = ({ login }) => {
+  const handleOnSubmit = (event) => {
     event.preventDefault();
 
     const username = event.target.username.value;
@@ -15,35 +36,60 @@ class Login extends React.Component {
     const data = {
       username,
       password,
-    }
-    this.props.login(data)
-  }
+    };
+    login(data);
+  };
+  const classes = useStyles();
 
-  render() {
-    return (
-      <div className="wrapper">
-        <form onSubmit={this.handleOnSubmit}>
-          <label htmlFor="username">Username:</label>
-          <input type="text" name="username" id="username" required />
-          <label>Password:</label>
-          <input type="text" name="password" id="password" required />
-          
-          <button>Submit</button>
+  return (
+    <Container maxWidth="xs">
+      <div className={classes.root}>
+        <form className={classes.form} noValidate onSubmit={handleOnSubmit}>
+          <TextField
+            required
+            id="username"
+            label="Username"
+            fullWidth
+            className="textfield"
+            margin="normal"
+            variant="outlined"
+            color="inherit"
+          />
+          <TextField
+            required
+            id="password"
+            label="Password"
+            fullWidth
+            className="textfield"
+            margin="normal"
+            variant="outlined"
+            color="inherit"
+          />
+          <Button
+            className={classes.button}
+            fullWidth
+            type="submit"
+            variant="contained"
+            color="primary"
+          >
+            Login
+          </Button>
+          <Grid container>
+            <Grid item xs>
+              <Link color="inherit" component={NavLink} to="/reset">
+                Need a password reset?
+              </Link>
+            </Grid>
+            <Grid item>
+              <Link color="inherit" component={NavLink} to="/signup">
+                New? Sign up here.
+              </Link>
+            </Grid>
+          </Grid>
         </form>
       </div>
-    );
-  }
-}
+    </Container>
+  );
+};
 
-const mapDispatch = dispatch => bindActionCreators(
-  {
-    login,
-  },
-  dispatch,
-);
-
-export default connect(null, mapDispatch)(Login);
-
-
-
-//export default Login;
+export default Login;

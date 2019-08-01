@@ -1,5 +1,4 @@
 import React from 'react';
-import './App.css';
 import Channels from '../containers/Channels';
 
 const App = () => (

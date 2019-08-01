@@ -1,48 +1,99 @@
 import React from 'react';
-import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
-import { signUp } from '../actions';
+import { NavLink } from 'react-router-dom';
+import {
+  TextField,
+  MenuItem,
+  Button,
+  Container,
+  Grid,
+  Link,
+} from '@material-ui/core';
 
+import { makeStyles } from '@material-ui/core/styles';
 
+const useStyles = makeStyles(theme => ({
+  root: {
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
+    marginTop: theme.spacing(6),
+  },
+  form: {
+    width: '100%',
+  },
+  button: {
+    width: '100%',
+    margin: theme.spacing(1, 0, 1),
+  },
+}));
 
-// eslint-disable-next-line react/prefer-stateless-function
-class Signup extends React.Component {
-  handleOnSubmit = event => {
+const Signup = ({ signUp }) => {
+  const handleOnSubmit = (event) => {
     event.preventDefault();
 
     const data = {
       username: event.target.username.value,
       password: event.target.password.value,
       email: event.target.email.value,
-    }
-    this.props.signUp(data);
-  }
+    };
+    signUp(data);
+  };
+  const classes = useStyles();
 
-  render() {
-    return (
-      <div className="wrapper">
-        <form onSubmit={this.handleOnSubmit}>
-          <label htmlFor="username">Username:</label>
-          <input type="text" name="username" id="username" required />
-          <br></br>
-          <label htmlFor="password">Password:</label>
-          <input type="text" name="password" id="password" required />
-          <br></br>
-          <label htmlFor="email">Email:</label>
-          <input type="text" name="email" id="email" required />
-           <br></br>
-          <button>Submit</button>
+  return (
+    <Container maxWidth="xs">
+      <div className={classes.root}>
+        <form className={classes.form} noValidate onSubmit={handleOnSubmit}>
+          <TextField
+            required
+            id="username"
+            label="Username"
+            fullWidth
+            className="textfield"
+            margin="normal"
+            variant="outlined"
+            color="inherit"
+          />
+          <TextField
+            required
+            id="email"
+            label="Email"
+            fullWidth
+            className="textfield"
+            margin="normal"
+            variant="outlined"
+            color="inherit"
+          />
+          <TextField
+            required
+            id="password"
+            label="Password"
+            fullWidth
+            className="textfield"
+            margin="normal"
+            variant="outlined"
+            color="inherit"
+          />
+          <Button
+            className={classes.button}
+            fullWidth
+            type="submit"
+            variant="contained"
+            color="primary"
+          >
+            Sign up
+          </Button>
+          <Grid container>
+            <Grid item>
+              <Link color="inherit" component={NavLink} to="/login">
+                Already have an account? Login.
+              </Link>
+            </Grid>
+          </Grid>
         </form>
       </div>
-    );
-  }
-}
+    </Container>
+  );
+};
 
-const mapDispatch = dispatch => bindActionCreators(
-  {
-    signUp,
-  },
-  dispatch,
-);
-
-export default connect(null, mapDispatch)(Signup);
+export default Signup;
