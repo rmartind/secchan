@@ -36,8 +36,7 @@ const Root = ({ store }) => (
           <Route exact path="/:channelName" component={Channel} />
           <Route exact path="/:channelName/:threadID" component={Thread} />
         </Switch>
-        <Footer />
-        </MuiThemeProvider>
+      </MuiThemeProvider>
     </Router>
   </Provider>
 );
