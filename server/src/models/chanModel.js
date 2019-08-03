@@ -7,21 +7,10 @@ const chanSchema = new Schema({
     type: String,
     required: true,
   },
-  topic: {
-    type: String,
-    minlength: 2,
-    maxlength: 100,
-  },
   type: {
     type: String,
     minlength: 3,
     maxlength: 50,
-  },
-  nsfw: Boolean,
-  position: {
-    type: Number,
-    min: 0,
-    max: 100,
   },
   creation: {
     type: Date,

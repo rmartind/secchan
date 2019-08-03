@@ -22,6 +22,7 @@ const getChanById = async (req, res) => {
 
 const createChan = async (req, res) => {
   try {
+    console.log(req.body);
     let newChan = await new Chan(req.body);
     newChan = await newChan.save();
     res.json(newChan);

@@ -7,6 +7,7 @@ import CssBaseline from "@material-ui/core/CssBaseline";
 import green from '@material-ui/core/colors/green';
 import App from './App';
 import Signup from '../containers/Signup';
+import Reset from '../containers/Reset';
 import Login from '../containers/Login';
 import Footer from './Footer';
 import Header from './Header';
@@ -28,9 +29,10 @@ const Root = ({ store }) => (
         <CssBaseline />
         <Header Nav={Nav} />
         <Switch>
+          <Route exact path="/" component={App} />
+          <Route exact path="/reset" component={Reset} />
           <Route exact path="/login" component={Login} />
           <Route exact path="/signup" component={Signup} />
-          <Route exact path="/" component={App} />
           <Route exact path="/:channelName" component={Channel} />
           <Route exact path="/:channelName/:threadID" component={Thread} />
         </Switch>
