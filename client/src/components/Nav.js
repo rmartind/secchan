@@ -6,7 +6,7 @@ import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 
 const Nav = () => (
-  <AppBar position="sitcky">
+  <AppBar position="sticky">
     <ToolBar>
       <Typography type="Devnulled" color="inherit" style={{ flex: 1 }} component={NavLink} to="/">
         Devnulled

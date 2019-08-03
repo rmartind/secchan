@@ -28,7 +28,7 @@ const useStyles = makeStyles(theme => ({
 
 const ThreadForm = ({ addThread, currentChannel }) => {
   const handleOnSubmit = (event) => {
-    event.preventDefault();
+    //event.preventDefault();
     const thread = {
       channelID: currentChannel._id,
       channelName: currentChannel.name,
@@ -48,7 +48,7 @@ const ThreadForm = ({ addThread, currentChannel }) => {
         <form className={classes.form} noValidate onSubmit={handleOnSubmit}>
           <TextField
             required
-            id="Title"
+            id="title"
             label="Title"
             fullWidth
             className="textfield"
@@ -58,10 +58,10 @@ const ThreadForm = ({ addThread, currentChannel }) => {
           />
           <TextField
             required
-            id="Content"
+            id="content"
             label="Content"
             fullWidth
-            classname="textfield"
+            className="textfield"
             margin="normal"
             variant="filled"
             color="inherit"
